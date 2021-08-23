@@ -23,17 +23,17 @@ function zemi_tipovi_igri(){
     return $result;
 }
 
-function add_igra($ime,$tip){
+function add_igra($ime,$tip,$tip2){
     global $db;
-    $query="INSERT INTO igri(igra_ime,igra_tip)
-            VALUES('$ime','$tip')";
+    $query="INSERT INTO igri(igra_ime,igra_tip,igra_vtor_tip)
+            VALUES('$ime','$tip','$tip2')";
     $db->exec($query);
 }
 
-function add_igra_slika($ime,$slika,$tip){
+function add_igra_slika($ime,$slika,$tip,$tip2){
 global $db;
-$query="INSERT INTO igri(igra_ime,igra_slika,igra_tip)
-            VALUES('$ime','$slika','$tip')";
+$query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip)
+            VALUES('$ime','$slika','$tip','$tip2')";
  $db->exec($query);       
 }
 

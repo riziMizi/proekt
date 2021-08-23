@@ -3,7 +3,7 @@ require('model/database_igri.php');
 $tipovi=zemi_tipovi_igri();
 ?>
 
-<div>
+<a href="igri/index.php?action=show_add_igra">Dodadi igra</a>
         <ul>
         <?php foreach ($tipovi as $tip) : ?>
             <li>

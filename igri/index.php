@@ -26,8 +26,15 @@ else if ($action == 'show_add_igra')
 else if ($action == 'add_igra')
 {
     $ime = $_POST['ime'];
-    $tip = $_POST['tip'];
+    $tip = $_POST['prv_tip'];
+    $vtorTip=$_POST['vtor_tip'];
+    $znameIgraTip=0;
     $znameIgra=0;
+    if(!empty($vtorTip)){
+        if($tip!=$vtorTip){
+            $znameIgraTip=1;
+        }
+    }
     $proverkaIme=proverka_dali_postoi_igra_so_ime($ime);
     if(strtolower($proverkaIme['igra_ime'])!=strtolower($ime)){
         $target_dir = 'images';
@@ -49,7 +56,11 @@ else if ($action == 'add_igra')
                 if (in_array($fileExtLow, $dozvoleniExt))
                 {
                     move_uploaded_file($tmp_name, $name);
-                    add_igra_slika($ime, $filename,$tip);
+                    if($znameIgraTip==1){
+                        add_igra_slika($ime, $filename,$tip,$vtorTip);
+                    }else{
+                        add_igra_slika($ime, $filename,$tip,0);
+                    }
                     $znameIgra=1;
                 }
                 else
@@ -61,9 +72,14 @@ else if ($action == 'add_igra')
             }
         }
         if($znameIgra==0){
-            add_igra($ime, $tip);
+            if($znameIgraTip==1){
+            add_igra($ime, $tip,$vtorTip);
+            }else{
+                add_igra($ime, $tip,0);
+            }
+
         }
-       header("Location: .?tip_id=$tip");
+      // header("Location: .?tip_id=$tip");
     }else{
         echo "Igrata sto ja vnesovte veke postoi";
     }
