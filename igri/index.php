@@ -95,7 +95,7 @@ else if ($action == 'add_igra')
             }
 
         }
-      //header("Location: ../index.php");
+      header("Location: ../index.php");
     }else{
         echo "Igrata sto ja vnesovte veke postoi";
     }
