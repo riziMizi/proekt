@@ -84,12 +84,10 @@ function stavi_ocena_na_igra($igra_id,$ocena){
      $db->exec($query);       
     }
 
-function proverka_dali_postoi_igra_so_ime($ime){
+function proverka_dali_postoi_igra_so_ime(){
     global $db;
-    $query="SELECT * FROM igri
-            WHERE igra_ime='$ime'"; 
+    $query="SELECT * FROM igri";
     $result=$db->query($query);
-    $result=$result->fetch();
     return $result;
 }
 

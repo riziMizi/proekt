@@ -27,18 +27,32 @@ else if ($action == 'show_add_igra')
 }
 else if ($action == 'add_igra')
 {
+    $nizaKirilica=['а','б','в','г','д','ѓ','е','ж','з','ѕ','и','ј','к','л','љ','м','н','њ','о','п','р','с','т','ќ','у','ф','х','ц','ч','џ','ш'];    
+    $nizaLatinica=['a','b','v','g','d','gj','e','zh','z','dz','i','j','k','l','lj','m','n','nj','o','p','r','s','t','kj','u','f','h','c','ch','dj','sh'];
     $ime = $_POST['ime'];
     $tip = $_POST['prv_tip'];
     $vtorTip=$_POST['vtor_tip'];
     $znameIgraTip=0;
     $znameIgra=0;
+    $znameIstoIme=0;
     if(!empty($vtorTip)){
         if($tip!=$vtorTip){
             $znameIgraTip=1;
         }
     }
-    $proverkaIme=proverka_dali_postoi_igra_so_ime($ime);
-    if(strtolower($proverkaIme['igra_ime'])!=strtolower($ime)){
+    
+    $imePomMali=mb_strtolower($ime, 'UTF-8');
+    $imePom=str_replace($nizaKirilica,$nizaLatinica,$imePomMali);
+    $proverkaIme=proverka_dali_postoi_igra_so_ime();
+    foreach($proverkaIme as $i){
+        $i['igra_ime']=mb_strtolower($i['igra_ime'], 'UTF-8');
+        $i['igra_ime']=str_replace($nizaKirilica,$nizaLatinica,$i['igra_ime']);
+        if(strcmp($i['igra_ime'],$imePom)==0){
+            $znameIstoIme=1;
+        }
+    }
+
+    if($znameIstoIme==0){
         $target_dir = 'images';
         $path = getcwd() . DIRECTORY_SEPARATOR . $target_dir;
         if (isset($_FILES['slika']))
@@ -81,7 +95,7 @@ else if ($action == 'add_igra')
             }
 
         }
-      header("Location: ../index.php");
+      //header("Location: ../index.php");
     }else{
         echo "Igrata sto ja vnesovte veke postoi";
     }
