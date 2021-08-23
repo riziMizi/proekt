@@ -40,7 +40,9 @@ else if ($action == 'add_igra')
             $znameIgraTip=1;
         }
     }
-    
+    $boolIme=ctype_alnum($ime);
+
+    if($boolIme){
     $imePomMali=mb_strtolower($ime, 'UTF-8');
     $imePom=str_replace($nizaKirilica,$nizaLatinica,$imePomMali);
     $proverkaIme=proverka_dali_postoi_igra_so_ime();
@@ -97,8 +99,11 @@ else if ($action == 'add_igra')
         }
       header("Location: ../index.php");
     }else{
-        echo "Igrata sto ja vnesovte veke postoi";
+        echo "Igrata sto ja vnesovte veke postoi!";
     }
+}else{
+    echo "Imeto moze da se sostoi samo od brojki i bukvi!";
+}
 }
 else if($action=='delete_igra')
 {
