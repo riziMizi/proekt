@@ -7,22 +7,6 @@ $result=$db->query($query);
 return $result;
 }
 
-function zemi_igri_po_tip($tip){
-    global $db;
-    $query="SELECT * FROM igri
-            WHERE igra_tip='$tip'
-            ORDER BY igra_id";
-    $igri=$db->query($query);
-    return $igri;
-}
-
-function zemi_tipovi_igri(){
-    global $db;
-    $query="SELECT * FROM tipovi_igri";
-    $result=$db->query($query);
-    return $result;
-}
-
 function add_igra($ime,$tip,$tip2){
     global $db;
     $query="INSERT INTO igri(igra_ime,igra_tip,igra_vtor_tip)
@@ -106,6 +90,14 @@ function proverka_dali_postoi_igra_so_ime($ime){
             WHERE igra_ime='$ime'"; 
     $result=$db->query($query);
     $result=$result->fetch();
+    return $result;
+}
+
+function zemi_top_10(){
+    global $db;
+    $query="SELECT * FROM igri 
+            ORDER BY igra_ocena DESC LIMIT 10";
+    $result=$db->query($query);
     return $result;
 }
 

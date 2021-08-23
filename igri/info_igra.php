@@ -2,6 +2,7 @@
 <?php include '../view/header.php'?>
 
     <h1><?php echo $igra['igra_ime'] ?></h1>
+    <a href="?tip_id=<?php echo $igra['igra_tip'] ?>">Vrati se nazad</a>
 
     <?php if(!empty($igra['igra_slika'])):?>
 <img src="images/<?php echo $igra['igra_slika'] ?>" width="300" height="200">

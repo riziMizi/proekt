@@ -1,5 +1,6 @@
 <?php
 require ('../model/database_igri.php');
+require('../model/database_tip.php');
 if (isset($_POST['action']))
 {
     $action = $_POST['action'];
@@ -17,6 +18,7 @@ if ($action == 'ispecati_igri_po_kategorija')
 {
     $tip = $_GET['tip_id'];
     $igri = zemi_igri_po_tip($tip);
+    $imeTip=zemi_ime_na_tip($tip);
     include ('ispecati_igri.php');
 }
 else if ($action == 'show_add_igra')
@@ -79,7 +81,7 @@ else if ($action == 'add_igra')
             }
 
         }
-      // header("Location: .?tip_id=$tip");
+      header("Location: ../index.php");
     }else{
         echo "Igrata sto ja vnesovte veke postoi";
     }
