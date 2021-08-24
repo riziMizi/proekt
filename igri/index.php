@@ -40,11 +40,13 @@ else if ($action == 'add_igra')
             $znameIgraTip=1;
         }
     }
-    $boolIme=ctype_alnum($ime);
+   
 
-    if($boolIme){
+    
     $imePomMali=mb_strtolower($ime, 'UTF-8');
     $imePom=str_replace($nizaKirilica,$nizaLatinica,$imePomMali);
+    $boolIme=ctype_alnum($imePom);
+    if($boolIme){
     $proverkaIme=proverka_dali_postoi_igra_so_ime();
     foreach($proverkaIme as $i){
         $i['igra_ime']=mb_strtolower($i['igra_ime'], 'UTF-8');
@@ -145,5 +147,11 @@ else if($action=='info_igra')
     $igra=zemi_igra_po_id($igra_id);
     $komentari=zemi_komentari_po_id($igra_id);
     include('info_igra.php');
+}
+else if($action=='igri_search')
+{
+   $ime=$_POST['ime'];
+   $igri=search_igri($ime);
+   include('ispecati_igri_search.php'); 
 }
 ?>

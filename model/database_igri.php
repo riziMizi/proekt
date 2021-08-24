@@ -99,5 +99,21 @@ function zemi_top_10(){
     return $result;
 }
 
+function search_igri($ime){
+    $nizaKirilica=['а','б','в','г','д','ѓ','е','ж','з','ѕ','и','ј','к','л','љ','м','н','њ','о','п','р','с','т','ќ','у','ф','х','ц','ч','џ','ш'];    
+    $nizaLatinica=['a','b','v','g','d','gj','e','zh','z','dz','i','j','k','l','lj','m','n','nj','o','p','r','s','t','kj','u','f','h','c','ch','dj','sh'];
+    $searchKirilica=str_replace($nizaLatinica,$nizaKirilica,$ime);
+    $searchLatinica=str_replace($nizaKirilica,$nizaLatinica,$ime);
+    global $db;
+    $query="SELECT * FROM igri
+            WHERE igra_ime LIKE '%$searchKirilica%' 
+            UNION 
+            SELECT * FROM igri
+            WHERE igra_ime LIKE '%$searchLatinica%'
+            ORDER BY igra_ocena DESC ";
+    $result=$db->query($query);
+    return $result;
+}
+
 
 ?>

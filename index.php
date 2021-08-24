@@ -6,6 +6,10 @@ $top10=zemi_top_10();
 <div>
 <a href="igri/index.php?action=show_add_igra">Dodadi igra</a>
 <a href="tipovi_igri/index.php?action=show_tipovi_igri">Prikazi tipovi na igri</a>
+<form action="igri/index.php?action=igri_search" method="post">
+<input type="input" name="ime" placeholder="Vnesete ime na igra" required />
+<input type="submit" value="Prebaraj" />
+</form>
 </div>
 
 <div>
