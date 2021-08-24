@@ -1,5 +1,7 @@
 <?php include '../view/header.php';?>
 
+<a href="../index.php">Vrati se na pocetna.</a>
+
 <table>
             <tr>
                 <th><?php echo $imeTip['tip_ime']; ?> </th>
