@@ -1,10 +1,11 @@
 <?php
+session_start();
 $dsn = 'mysql:host=localhost;dbname=web_proekt;charset=utf8';
-$username = 'root';
-$password = 'root';
+$usernameDb = 'root';
+$passwordDb = 'root';
 
 try {
-    $db = new PDO($dsn, $username, $password);
+    $db = new PDO($dsn, $usernameDb, $passwordDb);
 } catch (PDOException $e) {
     $error_message = $e->getMessage();
     include('../errors/database_error.php');
