@@ -1,5 +1,4 @@
 <?php
-session_start();
 $dsn = 'mysql:host=localhost;dbname=web_proekt;charset=utf8';
 $usernameDb = 'root';
 $passwordDb = 'root';

@@ -10,15 +10,15 @@ return $result;
 function add_igra($ime,$tip,$tip2){
     global $db;
     $query="INSERT INTO igri(igra_ime,igra_tip,igra_vtor_tip)
-            VALUES('$ime','$tip','$tip2')";
-    $db->exec($query);
+            VALUES(?,?,?)";
+    $db->prepare($query)->execute([$ime,$tip,$tip2]);
 }
 
 function add_igra_slika($ime,$slika,$tip,$tip2){
 global $db;
 $query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip)
-            VALUES('$ime','$slika','$tip','$tip2')";
- $db->exec($query);       
+            VALUES(?,?,?,?)";
+  $db->prepare($query)->execute([$ime,$slika,$tip,$tip2]);      
 }
 
 function delete_igra($id){
@@ -48,15 +48,15 @@ function zemi_komentari_po_id($id){
 function postavi_komentar_na_igra($igra_id,$komentar){
     global $db;
     $query="INSERT INTO komentari(igra_id,komentar)
-            VALUES('$igra_id','$komentar')";
-    $db->exec($query);
+            VALUES(?,?)";
+     $db->prepare($query)->execute([$igra_id,$komentar]);
 }
 
 function postavi_ocenka_na_igra($igra_id,$ocenka){
     global $db;
     $query="INSERT INTO oceni(igra_id,ocena)
-            VALUES('$igra_id','$ocenka')";
-    $db->exec($query);
+            VALUES(?,?)";
+    $db->prepare($query)->execute([$igra_id,$ocenka]);
 }
 
 function izbroj_oceni_po_igra($igra_id){

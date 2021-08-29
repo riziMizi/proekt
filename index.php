@@ -1,5 +1,6 @@
 <?php include 'view/header.php';
 require ('model/database_igri.php');
+require('model/login.php');
 $top10=zemi_top_10();
 ?>
 
@@ -11,9 +12,14 @@ $top10=zemi_top_10();
 <input type="submit" value="Prebaraj" />
 </form>
 <?php if(isset($_SESSION['username'])) :  ?>
+    <?php if(isset($_GET['najava'])): ?>
+        <?php if($_GET['najava']=="uspesna") : ?>
+    <p>Uspesna najava <?php echo $_SESSION['username']?></p>
+    <?php endif ;  ?>
+    <?php endif ;  ?>
     <a href="avtentikacija/index.php?action=log_out">Log Out</a> 
 <?php else :  ?>
-    <a href="avtentikacija/index.php">Sign In</a>
+    <a href="avtentikacija/index.php">Log In</a>
     <a href="avtentikacija/index.php?action=otvori_sign_up">Sign Up</a> 
 <?php endif ;  ?>
 </div>
