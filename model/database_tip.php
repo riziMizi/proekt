@@ -3,7 +3,7 @@
 function zemi_igri_po_tip($tip){
     global $db;
     $query="SELECT * FROM igri
-            WHERE igra_tip='$tip' OR igra_vtor_tip='$tip'
+            WHERE dozvolen_pristap=0 AND (igra_tip='$tip' OR igra_vtor_tip='$tip')
             ORDER BY igra_ocena DESC";
     $igri=$db->query($query);
     return $igri;

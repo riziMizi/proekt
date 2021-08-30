@@ -5,7 +5,12 @@ $top10=zemi_top_10();
 ?>
 
 <div>
+<?php if(isset($_SESSION['username'])) :  ?>
+    <?php if($_SESSION['role']=="admin") :  ?>
+    <a href="igri/index.php?action=novi_igri">Novi Igri</a>
+    <?php endif ;  ?>
 <a href="igri/index.php?action=show_add_igra">Dodadi igra</a>
+<?php endif ;  ?>
 <a href="tipovi_igri/index.php">Prikazi tipovi na igri</a>
 <form action="igri/index.php?action=igri_search" method="post">
 <input type="input" name="ime" placeholder="Vnesete ime na igra" required />

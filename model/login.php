@@ -3,14 +3,15 @@ require('database.php');
 session_start();
 
 //LOG IN
-function proveri_login($username,$password){
+function proveri_login($username){
 global $db;
 $query="SELECT * FROM user
-        WHERE username='$username' AND password='$password'";
+        WHERE username='$username'";
 $result=$db->query($query);
 $result=$result->fetch();
 return $result;
 }
+
 
 function prazni_polinja_log_in($username,$password){
         $result;
@@ -30,7 +31,8 @@ function dodadi_user($username,$password,$email,$role){
 global $db;
 $query="INSERT INTO user(username,password,email,role)
         VALUES(?,?,?,?) ";
-$db->prepare($query)->execute([$username,$password,$email,$role]);
+$hashPwd=password_hash($password,PASSWORD_DEFAULT);
+$db->prepare($query)->execute([$username,$hashPwd,$email,$role]);
 }
 
 function proveri_username($username){
@@ -68,6 +70,27 @@ if($password !== $password2){
         $result=true;
 }
 else{
+        $result=false;
+}
+return $result;
+}
+
+function nevaliden_username($username){
+        $result;
+if(!preg_match("/^[a-zA-Z0-9]*$/",$username)){
+        $result=true;
+}else{
+        $result=false;
+}
+return $result;
+}
+
+function password_length($password){
+        $result;
+$pom=strlen($password);
+if($pom<=5){
+        $result=true;
+}else{
         $result=false;
 }
 return $result;

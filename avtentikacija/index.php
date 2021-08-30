@@ -24,8 +24,11 @@ if(prazni_polinja_log_in($username,$password) !== false){
     header("Location: sign_in_prozor.php?error=prazno_pole");
      exit();
 }
-$user=proveri_login($username,$password);
-if($user==false){
+
+$user=proveri_login($username);
+$userPwd=$user['password'];
+$proverka=password_verify($password,$userPwd);
+if($proverka==false){
     header("Location: sign_in_prozor.php?error=pogresen_vlez");
      exit();
 }else{
@@ -34,7 +37,6 @@ if($user==false){
     $_SESSION['username']=$username;
     header("Location: ../index.php?najava=uspesna");
     exit();
-
 }
 
 }
@@ -43,7 +45,6 @@ else if($action=='log_out')
 $_SESSION=array();
 session_destroy();
 header("Location: ../index.php");
-echo '<script>alert("Uspesno se odjavivte od sesijata!");</script>';
 }
 else if($action=='otvori_sign_up')
 {
@@ -60,12 +61,20 @@ else if($action=='sign_up')
     header("Location: sign_up_prozor.php?error=prazno_pole");
      exit();
     }
+    if(nevaliden_username($username) !== false){
+        header("Location: sign_up_prozor.php?error=nevaliden_username");
+     exit();
+    }
     if(nevaliden_email($email) !== false){
         header("Location: sign_up_prozor.php?error=nevaliden_email");
      exit();
     }
     if(proveri_password($password,$password2) !== false){
         header("Location: sign_up_prozor.php?error=pogresen_password");
+     exit();
+    }
+    if(password_length($password) !== false){
+        header("Location: sign_up_prozor.php?error=length_password");
      exit();
     }
     $proverkaUsername=proveri_username($username);

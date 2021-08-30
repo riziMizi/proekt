@@ -9,16 +9,16 @@ return $result;
 
 function add_igra($ime,$tip,$tip2){
     global $db;
-    $query="INSERT INTO igri(igra_ime,igra_tip,igra_vtor_tip)
-            VALUES(?,?,?)";
-    $db->prepare($query)->execute([$ime,$tip,$tip2]);
+    $query="INSERT INTO igri(igra_ime,igra_tip,igra_vtor_tip,dozvolen_pristap)
+            VALUES(?,?,?,?)";
+    $db->prepare($query)->execute([$ime,$tip,$tip2,1]);
 }
 
 function add_igra_slika($ime,$slika,$tip,$tip2){
 global $db;
-$query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip)
-            VALUES(?,?,?,?)";
-  $db->prepare($query)->execute([$ime,$slika,$tip,$tip2]);      
+$query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip,dozvolen_pristap)
+            VALUES(?,?,?,?,?)";
+  $db->prepare($query)->execute([$ime,$slika,$tip,$tip2,1]);      
 }
 
 function delete_igra($id){
@@ -86,14 +86,16 @@ function stavi_ocena_na_igra($igra_id,$ocena){
 
 function proverka_dali_postoi_igra_so_ime(){
     global $db;
-    $query="SELECT * FROM igri";
+    $query="SELECT * FROM igri
+            WHERE dozvolen_pristap=0";
     $result=$db->query($query);
     return $result;
 }
 
 function zemi_top_10(){
     global $db;
-    $query="SELECT * FROM igri 
+    $query="SELECT * FROM igri
+            WHERE dozvolen_pristap=0 
             ORDER BY igra_ocena DESC LIMIT 10";
     $result=$db->query($query);
     return $result;
@@ -106,14 +108,48 @@ function search_igri($ime){
     $searchLatinica=str_replace($nizaKirilica,$nizaLatinica,$ime);
     global $db;
     $query="SELECT * FROM igri
-            WHERE igra_ime LIKE '%$searchKirilica%' 
+            WHERE dozvolen_pristap=0 AND igra_ime LIKE '%$searchKirilica%' 
             UNION 
             SELECT * FROM igri
-            WHERE igra_ime LIKE '%$searchLatinica%'
+            WHERE dozvolen_pristap=0 AND igra_ime LIKE '%$searchLatinica%'
             ORDER BY igra_ocena DESC ";
     $result=$db->query($query);
     return $result;
 }
 
+function zemi_novi_igri(){
+    global $db;
+$query='SELECT * FROM igri
+        WHERE dozvolen_pristap=1';
+$result=$db->query($query);
+return $result;
+}
 
+function dodadi_igra_admin($ime){
+    global $db;
+    $query="UPDATE igri SET dozvolen_pristap=0
+            WHERE igra_ime='$ime'";
+     $db->exec($query);  
+}
+
+function izbrisi_igra_admin($ime){
+    global $db;
+    $query="DELETE FROM igri
+            WHERE igra_ime='$ime'";
+    $db->exec($query);
+}
+
+function update_igra_admin($prvTip,$vtorTip){
+    global $db;
+    $query="UPDATE igri SET igra_tip='$prvTip',igra_vtor_tip='$vtorTip'
+            WHERE igra_ime='$ime'";
+     $db->exec($query); 
+}
+
+function update_igra_admin_slika($ime,$prvTip,$vtorTip,$slika){
+    global $db;
+    $query="UPDATE igri SET igra_tip='$prvTip',igra_vtor_tip='$vtorTip',igra_slika='$slika'
+            WHERE igra_ime='$ime'";
+     $db->exec($query); 
+}
 ?>

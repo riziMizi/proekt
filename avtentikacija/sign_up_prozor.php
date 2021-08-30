@@ -24,6 +24,12 @@ if(isset($_GET["error"])){
     else if($_GET["error"]=="pogresen_password"){
         echo "<p>Lozinkite ne se poklopuvaat!</p>";
     }
+    else if($_GET["error"]=="nevaliden_username"){
+        echo "<p>Username moze da se sostoi samo od bukvi i brojki!</p>";
+    }
+    else if($_GET["error"]=="length_password"){
+        echo "<p>Lozikata mora da ima barem 6 karakteri!</p>";
+    }
     else if($_GET["error"]=="uspesno"){
         echo "<p>Uspesno kreiravte account!</p>";
     }

@@ -40,9 +40,6 @@ else if ($action == 'add_igra')
             $znameIgraTip=1;
         }
     }
-   
-
-    
     $imePomMali=mb_strtolower($ime, 'UTF-8');
     $imePom=str_replace($nizaKirilica,$nizaLatinica,$imePomMali);
     $boolIme=ctype_alnum($imePom);
@@ -153,5 +150,87 @@ else if($action=='igri_search')
    $ime=$_POST['ime'];
    $igri=search_igri($ime);
    include('ispecati_igri_search.php'); 
+}
+else if($action=='novi_igri')
+{
+    $zname=0;
+    if(isset($_GET['nova'])){
+        if($_GET['nova']=='dodadi'){
+            dodadi_igra_admin($_POST['ime']);
+        }else if($_GET['nova']=='izbrisi'){
+            izbrisi_igra_admin($_POST['ime']);
+        }else if($_GET['nova']=='promeni'){
+            $zname=1;
+            $ImeIgra=$_POST['ime'];
+            $PrvTipIgra=$_POST['PrvTip'];
+            $VtorTipIgra=$_POST['VtorTip'];
+            $SlikaIgra=$_POST['Slika'];
+            include('promeni_nova_igra.php');
+        }
+    }
+    if(isset($_POST['pom'])){
+        if($_POST['pom']=='promeni'){
+            $Ime=$_POST['ime'];
+            $StaraSlika=$_POST['staraSlika'];
+            $PromenaPrvTip=$_POST['prv_tip'];
+            $PromenaVtorTip=$_POST['vtor_tip'];
+            $ZnameVtorTip=0;
+            $znameIgra=0;
+            if(!empty($PromenaVtorTip)){
+                if($PromenaPrvTip!=$PromenaVtorTip){
+                    $ZnameVtorTip=1;
+                }
+            }
+        $target_dir = 'images';
+        $path = getcwd() . DIRECTORY_SEPARATOR . $target_dir;
+        if (isset($_FILES['slika']))
+        {
+            $filename = $_FILES['slika']['name'];
+            $tmp_name = $_FILES['slika']['tmp_name'];
+            $name = $path . DIRECTORY_SEPARATOR . $filename;
+            if (!empty($filename))
+            {
+                $fileExt = explode('.', $filename);
+                $fileExtLow = strtolower($fileExt[1]);
+                $dozvoleniExt = array(
+                    'jpg',
+                    'png',
+                    'jpeg'
+                );
+                if (in_array($fileExtLow, $dozvoleniExt))
+                {
+                    move_uploaded_file($tmp_name, $name);
+                    if($ZnameVtorTip==1){
+                        update_igra_admin_slika($Ime,$PromenaPrvTip,$PromenaVtorTip,$filename);
+                    }else{
+                        update_igra_admin_slika($Ime,$PromenaPrvTip,0,$filename);
+                    }
+                    $znameIgra=1;
+                    if(!empty($StaraSlika)){
+                        $slika=$path .  DIRECTORY_SEPARATOR . $StaraSlika;
+                         unlink($slika);
+                   }
+                }
+                else
+                {
+                    $error = "Nedozvolen tip na file!Dozvoleni tipovi se:jpg,jpeg,png";
+                    include ('../errors/error.php');
+                    exit();
+                }
+            }
+        }
+        if($znameIgra==0){
+            if($ZnameVtorTip==1){
+            update_igra_admin($Ime, $PromenaPrvTip,$PromenaVtorTip);
+            }else{
+                update_igra_admin($Ime, $PromenaPrvTip,0);
+            }
+        }     
+        }
+    }
+    $igri=zemi_novi_igri();
+    if($zname==0){
+    include('admin_novi_igri.php');
+    }
 }
 ?>
