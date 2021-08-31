@@ -21,11 +21,19 @@ $query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip,dozvolen_pri
   $db->prepare($query)->execute([$ime,$slika,$tip,$tip2,1,$username]);      
 }
 
-function delete_igra($id){
+function izbrisi_igra($id){
     global $db;
     $query="DELETE FROM igri
             WHERE igra_id='$id'";
     $db->exec($query);
+
+    $query1="DELETE FROM komentari
+            WHERE igra_id='$id'";
+    $db->exec($query1);
+
+    $query2="DELETE FROM oceni
+            WHERE igra_id='$id'";
+    $db->exec($query2);
 }
 
 function zemi_igra_po_id($id){
@@ -43,6 +51,13 @@ function zemi_komentari_po_id($id){
             WHERE igra_id='$id'";
     $result=$db->query($query);
     return $result;
+}
+
+function izbrisi_komentar_admin($id){
+    global $db;
+    $query="DELETE FROM komentari
+            WHERE id='$id'";
+    $db->exec($query);
 }
 
 function postavi_komentar_na_igra($igra_id,$komentar){

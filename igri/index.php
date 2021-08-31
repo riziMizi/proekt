@@ -106,20 +106,18 @@ else if ($action == 'add_igra')
     echo "Imeto moze da se sostoi samo od brojki i bukvi!";
 }
 }
-else if($action=='delete_igra')
+else if($action=='izbrisi_igra')
 {
   $target_dir = 'images';
   $path = getcwd() . DIRECTORY_SEPARATOR . $target_dir;
     $igra_id=$_POST['igra_id'];
-    $igra_tip=$_POST['igra_tip'];
     $igra_slika=$_POST['igra_slika'];
-    delete_igra($igra_id);
+    izbrisi_igra($igra_id);
         if(!empty($igra_slika)){
                $slika=$path .  DIRECTORY_SEPARATOR . $igra_slika;
                 unlink($slika);
-
           }
-   header("Location: .?tip_id=$igra_tip");
+   header("Location: ../index.php");
 }
 else if($action=='info_igra')
 {
@@ -141,6 +139,11 @@ else if($action=='info_igra')
                 $prosek=0;
             }
             stavi_ocena_na_igra($igra_id,$prosek);
+        }else if($postavi=='izbrisi_komentar'){
+            $komentar_id=$_POST['komentar_id'];
+            izbrisi_komentar_admin($komentar_id);
+        }else if($postavi=='izbrisi_igra'){
+
         }
     }
     $igra=zemi_igra_po_id($igra_id);

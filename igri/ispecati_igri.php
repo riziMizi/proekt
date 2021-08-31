@@ -20,21 +20,6 @@
             <tr>
                 <td><p><?php echo $igra['igra_ocena']; ?></p></td>
             </tr>
-            <tr>
-                <td>
-        <form action="." method="post"> 
-                    <input type="hidden" name="action"
-                           value="delete_igra" />
-                    <input type="hidden" name="igra_id"
-                           value="<?php echo $igra['igra_id']; ?>" />
-                           <input type="hidden" name="igra_tip"
-                           value="<?php echo $igra['igra_tip']; ?>" />
-                           <input type="hidden" name="igra_slika"
-                           value="<?php echo $igra['igra_slika']; ?>" />
-                    <input type="submit" value="Delete" />
-                </form>
-        </td>
-        </tr>
             <?php endforeach; ?>
 
 </table>
