@@ -35,6 +35,7 @@ if($proverka==false){
     $pom=proveri_username($username);
     $_SESSION['role']=$pom['role'];
     $_SESSION['username']=$username;
+    $_SESSION['email']=$pom['email'];
     header("Location: ../index.php?najava=uspesna");
     exit();
 }
@@ -56,6 +57,10 @@ else if($action=='sign_up')
     $email=$_POST['email'];
     $password=$_POST['password'];
     $password2=$_POST['password2'];
+    setcookie('usernameCookie', $username);
+    setcookie('emailCookie', $email);
+    setcookie('passwordCookie', $password);
+    setcookie('password2Cookie', $password2);
     $user="user";
     if(prazni_polinja_sign_up($username,$password,$email,$password2) !== false){
     header("Location: sign_up_prozor.php?error=prazno_pole");
@@ -83,6 +88,18 @@ else if($action=='sign_up')
        exit();
     }else{
         dodadi_user($username,$password,$email,$user);
+            unset($_COOKIE['usernameCookie']);
+            setcookie('usernameCookie',null,-1);
+        
+            unset($_COOKIE['emailCookie']);
+            setcookie('emailCookie',null,-1);
+    
+            unset($_COOKIE['passwordCookie']);
+            setcookie('passwordCookie',null,-1);
+
+            unset($_COOKIE['password2Cookie']);
+            setcookie('password2Cookie',null,-1);
+
         header("Location: sign_up_prozor.php?error=uspesno");
         exit();
     }

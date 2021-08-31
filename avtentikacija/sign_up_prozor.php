@@ -3,10 +3,10 @@
 
 <form action="index.php" method="post">
 <input type="hidden" name="action" value="sign_up" />
-<input type="text" name="username" placeholder="Username"/>
-<input type="text" name="email" placeholder="E-mail"/>
-<input type="password" name="password" placeholder="Password"/>
-<input type="password" name="password2" placeholder="Repeat password"/>
+<input type="text" name="username" placeholder="Username" value="<?php if(isset($_COOKIE['usernameCookie'])) echo $_COOKIE['usernameCookie'] ;?>"/>
+<input type="text" name="email" placeholder="E-mail" value="<?php if(isset($_COOKIE['emailCookie'])) echo $_COOKIE['emailCookie'] ;?>" />
+<input type="password" name="password" placeholder="Password" value="<?php if(isset($_COOKIE['passwordCookie'])) echo $_COOKIE['passwordCookie'] ;?>" />
+<input type="password" name="password2" placeholder="Repeat password" value="<?php if(isset($_COOKIE['password2Cookie'])) echo $_COOKIE['password2Cookie'] ;?>" />
 <input type="submit"  value="Sign Up" />
 </form>
 

@@ -1,6 +1,8 @@
 <?php
 require ('../model/database_igri.php');
 require('../model/database_tip.php');
+require('../model/mail.php');
+require('../model/login.php');
 if (isset($_POST['action']))
 {
     $action = $_POST['action'];
@@ -32,6 +34,7 @@ else if ($action == 'add_igra')
     $ime = $_POST['ime'];
     $tip = $_POST['prv_tip'];
     $vtorTip=$_POST['vtor_tip'];
+    $username=$_SESSION['username'];
     $znameIgraTip=0;
     $znameIgra=0;
     $znameIstoIme=0;
@@ -74,9 +77,9 @@ else if ($action == 'add_igra')
                 {
                     move_uploaded_file($tmp_name, $name);
                     if($znameIgraTip==1){
-                        add_igra_slika($ime, $filename,$tip,$vtorTip);
+                        add_igra_slika($ime, $filename,$tip,$vtorTip,$username);
                     }else{
-                        add_igra_slika($ime, $filename,$tip,0);
+                        add_igra_slika($ime, $filename,$tip,0,$username);
                     }
                     $znameIgra=1;
                 }
@@ -90,11 +93,10 @@ else if ($action == 'add_igra')
         }
         if($znameIgra==0){
             if($znameIgraTip==1){
-            add_igra($ime, $tip,$vtorTip);
+            add_igra($ime, $tip,$vtorTip,$username);
             }else{
-                add_igra($ime, $tip,0);
+                add_igra($ime, $tip,0,$username);
             }
-
         }
       header("Location: ../index.php");
     }else{
@@ -156,7 +158,28 @@ else if($action=='novi_igri')
     $zname=0;
     if(isset($_GET['nova'])){
         if($_GET['nova']=='dodadi'){
-            dodadi_igra_admin($_POST['ime']);
+            $id=$_POST['id'];
+            $igra=zemi_igra_po_id($id);
+            $user=proveri_username($igra['username']);
+            $doAdresa=$user['email'];
+            $doIme=$user['username'];
+            $odAdresa="";
+            $odIme='OcenaIgri';
+            $subject="Ocena Igri-Predlog igra!";
+            $body='<p>Igrata <strong>'. $igra['igra_ime'] .'</strong> sto ja predlozivte bese dodadena na nasata stranica.</p>'.
+                '<p>Vi blagodarime na predlogot.</p>';
+            $is_body_html=true;
+            try{
+                prati_mail($doAdresa,$doIme,$odAdresa,$odIme,$subject,$body,$is_body_html);
+
+            }catch(Exception $e){
+                $error=$e->getMessage();
+                 include('../errors/error.php');
+                 exit();
+            }
+
+
+            dodadi_igra_admin($igra['igra_ime']);
         }else if($_GET['nova']=='izbrisi'){
             izbrisi_igra_admin($_POST['ime']);
         }else if($_GET['nova']=='promeni'){

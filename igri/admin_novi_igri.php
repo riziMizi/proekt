@@ -19,7 +19,7 @@
 <?php endif ; ?>
 <form action="index.php?nova=dodadi" method="post">
     <input type="hidden" name="action" value="novi_igri" />
-    <input type="hidden" name="ime" value="<?php echo $igra['igra_ime'] ;  ?>" />
+    <input type="hidden" name="id" value="<?php echo $igra['igra_id'] ;  ?>" />
     <input type="submit" value="Dodadi" />
 </form>
 <form action="index.php?nova=izbrisi" method="post">

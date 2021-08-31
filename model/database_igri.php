@@ -7,18 +7,18 @@ $result=$db->query($query);
 return $result;
 }
 
-function add_igra($ime,$tip,$tip2){
+function add_igra($ime,$tip,$tip2,$username){
     global $db;
-    $query="INSERT INTO igri(igra_ime,igra_tip,igra_vtor_tip,dozvolen_pristap)
-            VALUES(?,?,?,?)";
-    $db->prepare($query)->execute([$ime,$tip,$tip2,1]);
+    $query="INSERT INTO igri(igra_ime,igra_tip,igra_vtor_tip,dozvolen_pristap,username)
+            VALUES(?,?,?,?,?)";
+    $db->prepare($query)->execute([$ime,$tip,$tip2,1,$username]);
 }
 
-function add_igra_slika($ime,$slika,$tip,$tip2){
+function add_igra_slika($ime,$slika,$tip,$tip2,$username){
 global $db;
-$query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip,dozvolen_pristap)
+$query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip,dozvolen_pristap,username)
             VALUES(?,?,?,?,?)";
-  $db->prepare($query)->execute([$ime,$slika,$tip,$tip2,1]);      
+  $db->prepare($query)->execute([$ime,$slika,$tip,$tip2,1,$username]);      
 }
 
 function delete_igra($id){
