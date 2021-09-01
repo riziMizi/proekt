@@ -107,6 +107,14 @@ function proverka_dali_postoi_igra_so_ime(){
     return $result;
 }
 
+function proverka_predlozena_igra(){
+        global $db;
+        $query="SELECT * FROM igri
+                WHERE dozvolen_pristap=1";
+        $result=$db->query($query);
+        return $result;
+    }
+
 function zemi_top_10(){
     global $db;
     $query="SELECT * FROM igri
@@ -154,7 +162,7 @@ function izbrisi_igra_admin($ime){
     $db->exec($query);
 }
 
-function update_igra_admin($prvTip,$vtorTip){
+function update_igra_admin($ime,$prvTip,$vtorTip){
     global $db;
     $query="UPDATE igri SET igra_tip='$prvTip',igra_vtor_tip='$vtorTip'
             WHERE igra_ime='$ime'";

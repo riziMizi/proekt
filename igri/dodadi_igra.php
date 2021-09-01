@@ -1,17 +1,29 @@
 <?php include '../view/header.php'; 
-$tipovi=zemi_tipovi_igri();
-$tipovi1=zemi_tipovi_igri();
+
+ $tipovi=zemi_tipovi_igri();
+ $tipovi1=zemi_tipovi_igri();
 ?>
 <div >
-    <h1>Add Game</h1>
+    <h1>Predlozi igra</h1>
     <form action="index.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="add_igra" />
 
-        <label>Name:</label>
+        <label>Ime:</label>
         <input type="input" name="ime" required />
         <br />
+        <?php
+        if(isset($_GET['error'])){
+            if($_GET['error']=='igrata_postoi'){
+                echo "<p>Igrata sto ja vnesovte veke e postavena na stranata! </p>";
+            }else if($_GET['error']=='pogresen_vlez'){
+            echo "<p>Imeto na igrata moze da se sostoi samo od bukvi i brojki!</p>";
+            }else if($_GET['error']=='igrata_predlozena'){
+                echo "<p>Igrata sto ja vnesovte e veke predlozena!</p>"; 
+            }
+        }
+        ?>
 
-        <p>Izberete tip na zanr:</p>
+        <p>Izberete tip na igrata:</p>
         <select name="prv_tip">
         <?php foreach($tipovi as $tip) : ?>
         <option  value="<?php echo $tip['tip_id'] ; ?>">
@@ -20,7 +32,7 @@ $tipovi1=zemi_tipovi_igri();
         <?php endforeach ;  ?>
         </select>
 
-        <p>Izberete vtor tip na zanr(Opcionalno):</p>
+        <p>Izberete vtor tip na igrata(Opcionalno):</p>
         <select name="vtor_tip">  
             <option value=""></option>
             <?php foreach($tipovi1 as $tip) : ?>
@@ -39,5 +51,12 @@ $tipovi1=zemi_tipovi_igri();
         <input type="submit" value="Dodadi igra" />
         <br />  <br />
     </form>
-
 </div>
+<?php
+     if(isset($_GET['error'])){
+         if($_GET['error']=='uspesno_predlozena'){
+            echo "<p>Vi blagodarime na predlozenata igra! </p>";
+         }
+
+     }
+?>

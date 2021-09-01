@@ -38,6 +38,7 @@ else if ($action == 'add_igra')
     $znameIgraTip=0;
     $znameIgra=0;
     $znameIstoIme=0;
+    $znamePredlozenaIme=0;
     if(!empty($vtorTip)){
         if($tip!=$vtorTip){
             $znameIgraTip=1;
@@ -55,8 +56,18 @@ else if ($action == 'add_igra')
             $znameIstoIme=1;
         }
     }
+    $proverkaPredlozenaIme=proverka_predlozena_igra();
+    foreach($proverkaPredlozenaIme as $i){
+        $i['igra_ime']=mb_strtolower($i['igra_ime'], 'UTF-8');
+        $i['igra_ime']=str_replace($nizaKirilica,$nizaLatinica,$i['igra_ime']);
+        if(strcmp($i['igra_ime'],$imePom)==0){
+            $znamePredlozenaIme=1;
+        }
+    }
+
 
     if($znameIstoIme==0){
+        if($znamePredlozenaIme==0){
         $target_dir = 'images';
         $path = getcwd() . DIRECTORY_SEPARATOR . $target_dir;
         if (isset($_FILES['slika']))
@@ -98,12 +109,18 @@ else if ($action == 'add_igra')
                 add_igra($ime, $tip,0,$username);
             }
         }
-      header("Location: ../index.php");
+      header("Location: index.php?action=show_add_igra&error=uspesno_predlozena");
     }else{
-        echo "Igrata sto ja vnesovte veke postoi!";
+        header("Location: index.php?action=show_add_igra&error=igrata_predlozena");
+        exit();
+    }
+    }else{
+        header("Location: index.php?action=show_add_igra&error=igrata_postoi");
+        exit();
     }
 }else{
-    echo "Imeto moze da se sostoi samo od brojki i bukvi!";
+    header("Location: index.php?action=show_add_igra&error=pogresen_vlez");
+        exit();
 }
 }
 else if($action=='izbrisi_igra')
