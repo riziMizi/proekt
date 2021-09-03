@@ -1,6 +1,5 @@
 <?php include '../view/header.php' ?>
 
-<a href="../index.php">Vrati se na pocetna.</a>
 <table>
             <tr>
                 <th><?php echo $ime ?> </th>
@@ -17,7 +16,7 @@
                 <?php endif ; ?>
             </tr>
             <tr>
-                <td><p><?php echo $igra['igra_ocena']; ?></p></td>
+                <td><p>Оцена:<?php echo $igra['igra_ocena']; ?></p></td>
             </tr>
             <?php endforeach; ?>
 

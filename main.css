@@ -1,5 +1,107 @@
-body{
-    margin-top: 0;
+body {
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-
+    background-color:   rgb(49, 46, 46);
 }
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Top 10 igri */
+
+#hover_top_10 {
+    padding-bottom: 15px;
+    padding-top: 20px;
+}
+
+#ocena_top_10 {
+ color: rgb(131, 33, 33);
+ border-bottom: burlywood solid 1px;
+}
+
+#top_10{
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    margin: auto;
+    width: 50;
+}
+
+#top10_tekst {
+    padding-bottom: 20px;
+    color: blanchedalmond;
+}
+
+#hover_top_10:hover{
+    -webkit-transform: scale(1.2);
+}
+
+/* Header */
+
+#ime_user {
+    color:  blanchedalmond ;
+    margin-bottom: 5px;
+    font-size: 120%;
+}
+
+#text_search {
+    background-color: blanchedalmond ;
+}
+
+#button_search {
+    background-color: blanchedalmond ;
+    border-radius: 5px;
+}
+
+#div_pocetna_lista {
+    background-color: rgb(131, 33, 33);
+    width: 100%;
+    
+}
+
+#pocetna_lista a{
+    color: blanchedalmond;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+#pocetna_lista {
+    margin: 0;
+}
+   
+
+#hover:hover{
+    -webkit-transform: scale(1.2);
+}
+
+#pocetna_lista li {
+float: left;
+list-style-type: none;
+margin-right: 40px;
+}
+
+#glavna_lista_desno {
+display: flex;
+justify-content: flex-end;
+}
+
+/* Prkazi tipovi */
+
+#lista_tipovi {
+    font-size: 150%;
+    list-style-type: square;
+}
+
+#li_tipovi a {
+    color: rgb(197, 88, 88);
+}
+#li_tipovi a:hover {
+    color: rgb(197, 44, 44);
+}
+
+/*  */

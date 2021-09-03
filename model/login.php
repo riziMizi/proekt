@@ -3,15 +3,6 @@ require('database.php');
 session_start();
 
 //LOG IN
-function proveri_login($username){
-global $db;
-$query="SELECT * FROM user
-        WHERE username='$username'";
-$result=$db->query($query);
-$result=$result->fetch();
-return $result;
-}
-
 
 function prazni_polinja_log_in($username,$password){
         $result;

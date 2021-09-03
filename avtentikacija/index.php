@@ -25,18 +25,17 @@ if(prazni_polinja_log_in($username,$password) !== false){
      exit();
 }
 
-$user=proveri_login($username);
+$user=proveri_username($username);
 $userPwd=$user['password'];
 $proverka=password_verify($password,$userPwd);
 if($proverka==false){
     header("Location: sign_in_prozor.php?error=pogresen_vlez");
      exit();
 }else{
-    $pom=proveri_username($username);
-    $_SESSION['role']=$pom['role'];
+    $_SESSION['role']=$user['role'];
     $_SESSION['username']=$username;
-    $_SESSION['email']=$pom['email'];
-    header("Location: ../index.php?najava=uspesna");
+    $_SESSION['email']=$user['email'];
+    header("Location: ../index.php");
     exit();
 }
 

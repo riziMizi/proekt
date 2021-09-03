@@ -4,8 +4,6 @@ $imePrvTip=zemi_ime_na_tip($igra['igra_tip']);
 $imeVtorTip=zemi_ime_na_tip($igra['igra_vtor_tip']);
 ?>
 
-<a href="../index.php">Vrati se na pocetna.</a>
-
     <h1><?php echo $igra['igra_ime'] ?></h1>
 
     <?php if(isset($_SESSION['role'])) : ?>
@@ -13,25 +11,25 @@ $imeVtorTip=zemi_ime_na_tip($igra['igra_vtor_tip']);
     <form action="index.php?action=izbrisi_igra" method="post">
     <input type="hidden" name="igra_id" value="<?php echo $igra['igra_id']; ?>" />
     <input type="hidden" name="igra_slika" value="<?php echo $igra['igra_slika']; ?>" />
-    <input type="submit" value="Izbrisi igra" />
+    <input type="submit" value="Избриши игра" />
     </form>
 
     <?php endif ;  ?>
     <?php endif ;  ?>
 
-    <a href="?tip_id=<?php echo $igra['igra_tip'] ?>">Otvori lista na <?php echo $imePrvTip['tip_ime']; ?> igri.</a>
+    <a href="?tip_id=<?php echo $igra['igra_tip'] ?>">Отвори игри од <?php echo $imePrvTip['tip_ime']; ?> тип.</a>
 
     <?php if($igra['igra_vtor_tip']!=0) : ?>
-        <a href="?tip_id=<?php echo $igra['igra_vtor_tip'] ?>">Otvori lista na <?php echo $imeVtorTip['tip_ime']; ?> igri.</a>
+        <a href="?tip_id=<?php echo $igra['igra_vtor_tip'] ?>">Отвори игри од <?php echo $imeVtorTip['tip_ime']; ?> тип.</a>
         <?php endif ; ?>
 
     <?php if(!empty($igra['igra_slika'])):?>
 <img src="images/<?php echo $igra['igra_slika'] ?>" width="300" height="200">
 <?php endif ; ?>
-<p>Ocena:<?php echo $igra['igra_ocena'] ?></p>
+<p>Оцена:<?php echo $igra['igra_ocena'] ?></p>
 
 
-<p>Ocenete ja igrata:</p>
+<p>Оценете ја играта:</p>
 <form  action="index.php?action=info_igra&postavi=ocenka&igra_id=<?php echo $igra['igra_id']; ?>" method="post">
 <select name="ocena">
     <option value=""></option>
@@ -43,9 +41,9 @@ $imeVtorTip=zemi_ime_na_tip($igra['igra_vtor_tip']);
 <?php endfor ;  ?>
 </select>
 
-<p>Komentiraj:</p>
+<p>Коментирај:</p>
 <textarea  rows="10" cols="20" name="komentar" required></textarea>
-<input type="submit"  value="Komentiraj"/>
+<input type="submit"  value="Коментирај"/>
 </form>
 
 <ul>
@@ -57,7 +55,7 @@ $imeVtorTip=zemi_ime_na_tip($igra['igra_vtor_tip']);
             <?php if($_SESSION['role']=='admin') :  ?>
         <form action="index.php?action=info_igra&postavi=izbrisi_komentar&igra_id=<?php echo $igra['igra_id']; ?>" method="post">
             <input type="hidden" name="komentar_id" value="<?php echo $kom['id'] ;  ?>" />
-            <input type="submit" value="Izbrisi komentar" />
+            <input type="submit" value="Избриши коментар" />
     </form>
     <?php endif ;  ?>
     <?php endif ;  ?>

@@ -3,35 +3,35 @@
 
 <form action="index.php" method="post">
 <input type="hidden" name="action" value="sign_up" />
-<input type="text" name="username" placeholder="Username" value="<?php if(isset($_COOKIE['usernameCookie'])) echo $_COOKIE['usernameCookie'] ;?>"/>
+<input type="text" name="username" placeholder="Корисничко име" value="<?php if(isset($_COOKIE['usernameCookie'])) echo $_COOKIE['usernameCookie'] ;?>"/>
 <input type="text" name="email" placeholder="E-mail" value="<?php if(isset($_COOKIE['emailCookie'])) echo $_COOKIE['emailCookie'] ;?>" />
-<input type="password" name="password" placeholder="Password" value="<?php if(isset($_COOKIE['passwordCookie'])) echo $_COOKIE['passwordCookie'] ;?>" />
-<input type="password" name="password2" placeholder="Repeat password" value="<?php if(isset($_COOKIE['password2Cookie'])) echo $_COOKIE['password2Cookie'] ;?>" />
-<input type="submit"  value="Sign Up" />
+<input type="password" name="password" placeholder="Лозинка" value="<?php if(isset($_COOKIE['passwordCookie'])) echo $_COOKIE['passwordCookie'] ;?>" />
+<input type="password" name="password2" placeholder="Повторете ја лозинката" value="<?php if(isset($_COOKIE['password2Cookie'])) echo $_COOKIE['password2Cookie'] ;?>" />
+<input type="submit"  value="Регистрирај sе" />
 </form>
 
 <?php
 if(isset($_GET["error"])){
     if($_GET["error"]=="prazno_pole"){
-        echo "<p>Ne gi popolnivte potrebnite polinja! </p>";
+        echo "<p>Не ги пополнивте потребните полиња! </p>";
     }
     else if($_GET["error"]=="postoecki_username"){
-        echo "<p>Vnesovte postoecko korisnicko ime!</p>";
+        echo "<p>Внесовте постоечко корисничко име!</p>";
     }
     else if($_GET["error"]=="nevaliden_email"){
-        echo "<p>Vnesovte nevaliden email!</p>";
+        echo "<p>Внесовте невалиден e-mail!</p>";
     }
     else if($_GET["error"]=="pogresen_password"){
-        echo "<p>Lozinkite ne se poklopuvaat!</p>";
+        echo "<p>Лозинките не се поклопуваат!</p>";
     }
     else if($_GET["error"]=="nevaliden_username"){
-        echo "<p>Username moze da se sostoi samo od bukvi i brojki!</p>";
+        echo "<p>Корисничкото име може да се состои само од бројки и букви!</p>";
     }
     else if($_GET["error"]=="length_password"){
-        echo "<p>Lozikata mora da ima barem 6 karakteri!</p>";
+        echo "<p>Лозинката мора да се состои од барем 6 карактери!</p>";
     }
     else if($_GET["error"]=="uspesno"){
-        echo "<p>Uspesno kreiravte account!</p>";
+        echo "<p>Успешно се регистриравте!</p>";
     }
 }
 ?>

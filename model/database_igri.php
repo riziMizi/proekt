@@ -17,7 +17,7 @@ function add_igra($ime,$tip,$tip2,$username){
 function add_igra_slika($ime,$slika,$tip,$tip2,$username){
 global $db;
 $query="INSERT INTO igri(igra_ime,igra_slika,igra_tip,igra_vtor_tip,dozvolen_pristap,username)
-            VALUES(?,?,?,?,?)";
+            VALUES(?,?,?,?,?,?)";
   $db->prepare($query)->execute([$ime,$slika,$tip,$tip2,1,$username]);      
 }
 

@@ -46,8 +46,6 @@ else if ($action == 'add_igra')
     }
     $imePomMali=mb_strtolower($ime, 'UTF-8');
     $imePom=str_replace($nizaKirilica,$nizaLatinica,$imePomMali);
-    $boolIme=ctype_alnum($imePom);
-    if($boolIme){
     $proverkaIme=proverka_dali_postoi_igra_so_ime();
     foreach($proverkaIme as $i){
         $i['igra_ime']=mb_strtolower($i['igra_ime'], 'UTF-8');
@@ -82,7 +80,8 @@ else if ($action == 'add_igra')
                 $dozvoleniExt = array(
                     'jpg',
                     'png',
-                    'jpeg'
+                    'jpeg',
+                    'jfif'
                 );
                 if (in_array($fileExtLow, $dozvoleniExt))
                 {
@@ -96,7 +95,7 @@ else if ($action == 'add_igra')
                 }
                 else
                 {
-                    $error = "Nedozvolen tip na file!Dozvoleni tipovi se:jpg,jpeg,png";
+                    $error = "Недозволен тип на file!Дозволени типови се:jpg,jpeg,png,jfif";
                     include ('../errors/error.php');
                     exit();
                 }
@@ -118,10 +117,6 @@ else if ($action == 'add_igra')
         header("Location: index.php?action=show_add_igra&error=igrata_postoi");
         exit();
     }
-}else{
-    header("Location: index.php?action=show_add_igra&error=pogresen_vlez");
-        exit();
-}
 }
 else if($action=='izbrisi_igra')
 {
@@ -181,13 +176,14 @@ else if($action=='novi_igri')
             $id=$_POST['id'];
             $igra=zemi_igra_po_id($id);
             $user=proveri_username($igra['username']);
+            if($user['role']!='admin'){
             $doAdresa=$user['email'];
             $doIme=$user['username'];
             $odAdresa="";
             $odIme='OcenaIgri';
-            $subject="Ocena Igri-Predlog igra!";
-            $body='<p>Igrata <strong>'. $igra['igra_ime'] .'</strong> sto ja predlozivte bese dodadena na nasata stranica.</p>'.
-                '<p>Vi blagodarime na predlogot.</p>';
+            $subject="Оцена игри-Предлог игра!";
+            $body='<p>Играта <strong>'. $igra['igra_ime'] .'</strong> што ја предложивте е додадена на нашата страница.</p>'.
+                '<p>Ви благодариме на предлогот.</p>';
             $is_body_html=true;
             try{
                 prati_mail($doAdresa,$doIme,$odAdresa,$odIme,$subject,$body,$is_body_html);
@@ -197,7 +193,7 @@ else if($action=='novi_igri')
                  include('../errors/error.php');
                  exit();
             }
-
+        }
 
             dodadi_igra_admin($igra['igra_ime']);
         }else if($_GET['nova']=='izbrisi'){
@@ -238,7 +234,8 @@ else if($action=='novi_igri')
                 $dozvoleniExt = array(
                     'jpg',
                     'png',
-                    'jpeg'
+                    'jpeg',
+                    'jfif'
                 );
                 if (in_array($fileExtLow, $dozvoleniExt))
                 {
@@ -256,7 +253,7 @@ else if($action=='novi_igri')
                 }
                 else
                 {
-                    $error = "Nedozvolen tip na file!Dozvoleni tipovi se:jpg,jpeg,png";
+                    $error = "Недозволен тип на file!Дозволени типови се:jpg,jpeg,png,jfif";
                     include ('../errors/error.php');
                     exit();
                 }
