@@ -10,6 +10,7 @@ else if (isset($_GET['action']))
 }
 else
 {
+    proveri_cookies();
     $action = 'otvori_sign_in';
 }
 
@@ -48,6 +49,8 @@ header("Location: ../index.php");
 }
 else if($action=='otvori_sign_up')
 {
+    proveri_cookies();
+
     include('sign_up_prozor.php');
 }
 else if($action=='sign_up')

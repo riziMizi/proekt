@@ -22,14 +22,14 @@
     </li>
     <?php endif ;  ?>
     <li id="hover">
-<a  href="<?php echo $pateka  ?>igri/index.php?action=show_add_igra">Додади игра</a>
+<a  href="<?php echo $pateka  ?>igri/index.php?action=show_add_igra">Предложи игра</a>
     </li>
 <?php endif ;  ?>
     <li id="hover">
         <a  href="<?php echo $pateka ;   ?>">Топ 10</a>
     </li>
 <li id="hover">
-<a  href="<?php echo $pateka  ?>tipovi_igri/index.php">Прикажи типови на игри</a>
+<a  href="<?php echo $pateka  ?>tipovi_igri/index.php">Прикажи жанрови на игри</a>
     </li>
     <div id="glavna_lista_desno">   
     <li>

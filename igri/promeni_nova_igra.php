@@ -3,18 +3,17 @@ $tipovi=zemi_tipovi_igri();
 $tipovi1=zemi_tipovi_igri();
 ?>
 
-<div >
-    <h1>Промени игра</h1>
+<div id="predlozi_igra">
+    <h1 id="top10_tekst">Промени игра</h1>
     <form action="index.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="action" value="novi_igri" />
     <input type="hidden" name="pom" value="promeni" />
     <input type="hidden" name="ime" value="<?php echo $ImeIgra  ?>" />
     <input type="hidden" name="staraSlika" value="<?php echo $SlikaIgra  ?>" />
-        <label>Име:</label>
-        <p><?php echo $ImeIgra  ?> </p>
+        <h2><?php echo $ImeIgra  ?> </h2>
 
-        <p>Прв тип:</p>
-        <select name="prv_tip">
+        <label>Жанрови:</label>
+        <select id="text_search" name="prv_tip">
         <?php foreach($tipovi as $tip) : ?>
             <?php if($tip['tip_id']==$PrvTipIgra) : ?>
         <option  value="<?php echo $tip['tip_id'] ; ?>" selected>
@@ -28,8 +27,7 @@ $tipovi1=zemi_tipovi_igri();
         <?php endforeach ;  ?>
         </select>
 
-        <p>Втор тип:</p>
-        <select name="vtor_tip">  
+        <select id="text_search" name="vtor_tip">  
             <option value=""></option>
             <?php foreach($tipovi1 as $tip) : ?>
                 <?php if($tip['tip_id']==$VtorTipIgra) : ?>
@@ -43,15 +41,17 @@ $tipovi1=zemi_tipovi_igri();
             <?php endif ;  ?>   
         <?php endforeach ;  ?>
     </select>
-    <br />
+    <br><br>
 
         <label>Слика:</label>
-            <input type="file" name="slika" />
-        <br />
+            <input id="slika" type="file" name="slika" />
+            <br><br>
 
         <label>&nbsp;</label>
-        <input type="submit" value="Промени игра" />
+        <input id="button_promeni" type="submit" value="Промени игра" />
         <br />  <br />
     </form>
 
 </div>
+
+<?php include '../view/footer.php';?>

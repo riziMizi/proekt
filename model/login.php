@@ -87,6 +87,25 @@ if($pom<=5){
 return $result;
 }
 
+function proveri_cookies(){
+        if(isset($_COOKIE['usernameCookie'])){
+                unset($_COOKIE['usernameCookie']);
+                setcookie('usernameCookie',null,-1);
+        }
+        if(isset($_COOKIE['emailCookie'])){
+                unset($_COOKIE['emailCookie']);
+                setcookie('emailCookie',null,-1);
+        }
+        if(isset($_COOKIE['passwordCookie'])){
+                unset($_COOKIE['passwordCookie']);
+                setcookie('passwordCookie',null,-1);
+        }
+        if(isset($_COOKIE['password2Cookie'])){
+                unset($_COOKIE['password2Cookie']);
+                setcookie('password2Cookie',null,-1);
+        }
+}
+
 
 
 

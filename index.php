@@ -17,7 +17,7 @@ $top10=zemi_top_10();
             </tr>
             <tr>
                 <?php if(!empty($igra['igra_slika'])):?>
-                     <td><img src="igri/images/<?php echo $igra['igra_slika'] ?>" width="350" height="250"></td>
+                     <td><img src="igri/images/<?php echo $igra['igra_slika'] ?>" width="400" height="300"></td>
                 <?php else : ?>
                      <td></td>
                 <?php endif ; ?>

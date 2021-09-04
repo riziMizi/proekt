@@ -48,7 +48,8 @@ function zemi_igra_po_id($id){
 function zemi_komentari_po_id($id){
     global $db;
     $query="SELECT * FROM komentari
-            WHERE igra_id='$id'";
+            WHERE igra_id='$id'
+            ORDER BY id DESC";
     $result=$db->query($query);
     return $result;
 }
@@ -60,11 +61,11 @@ function izbrisi_komentar_admin($id){
     $db->exec($query);
 }
 
-function postavi_komentar_na_igra($igra_id,$komentar){
+function postavi_komentar_na_igra($igra_id,$komentar,$datum){
     global $db;
-    $query="INSERT INTO komentari(igra_id,komentar)
-            VALUES(?,?)";
-     $db->prepare($query)->execute([$igra_id,$komentar]);
+    $query="INSERT INTO komentari(igra_id,komentar,datum)
+            VALUES(?,?,?)";
+     $db->prepare($query)->execute([$igra_id,$komentar,$datum]);
 }
 
 function postavi_ocenka_na_igra($igra_id,$ocenka){

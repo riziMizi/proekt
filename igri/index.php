@@ -142,7 +142,8 @@ else if($action=='info_igra')
             postavi_ocenka_na_igra($igra_id,$ocenka);
             }
             $komentar=$_POST['komentar'];
-            postavi_komentar_na_igra($igra_id,$komentar);
+            $datum=date("Y/m/d h:i:s");
+            postavi_komentar_na_igra($igra_id,$komentar,$datum);
             $vkupnoOceni=izbroj_oceni_po_igra($igra_id);
             $sumaOceni=soberi_oceni_po_igra($igra_id);
             if($vkupnoOceni['vkupno']!=0){

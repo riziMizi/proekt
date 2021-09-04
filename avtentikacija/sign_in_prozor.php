@@ -1,10 +1,14 @@
 <?php include '../view/header.php';  ?>
 
+<div id="sign_up">
+<h1 id="top10_tekst">Најави се</h1>
 <form action="index.php" method="post">
 <input type="hidden" name="action" value="login" />
-<input type="text" name="username" placeholder="Корисничко име"/>
-<input type="password" name="password" placeholder="Лозинка"/>
-<input type="submit" value="Најави се" />
+<input id="input" type="text" name="username" placeholder="Корисничко име"/>
+<br>
+<input id="input" type="password" name="password" placeholder="Лозинка"/>
+<br><br>
+<input id="button_search" type="submit" value="Најави се" />
 </form>
 
 <?php
@@ -18,3 +22,5 @@ if(isset($_GET['error'])){
 }
 
 ?>
+
+</div>

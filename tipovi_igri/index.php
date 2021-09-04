@@ -1,6 +1,7 @@
 <?php
 require ('../model/database_igri.php');
 require('../model/database_tip.php');
+require('../model/login.php');
 if (isset($_POST['action']))
 {
     $action = $_POST['action'];
