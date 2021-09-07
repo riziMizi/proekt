@@ -23,6 +23,7 @@
 <form action="index.php?nova=izbrisi" method="post">
 <input type="hidden" name="action" value="novi_igri" />
 <input type="hidden" name="ime" value="<?php echo $igra['igra_ime'] ;  ?>" />
+<input type="hidden" name="Slika" value="<?php echo $igra['igra_slika'] ;  ?>" />
 <input id="button_search" type="submit" value="Избриши" />
 </form>
 <form action="index.php?nova=promeni" method="post">

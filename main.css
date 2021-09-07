@@ -243,7 +243,7 @@ padding-left: 2%;
  }
 
 
- /* Sign-Up */
+ /* Sign-Up/Sign-In */
 
  #sign_up {
      text-align: center;
@@ -256,6 +256,10 @@ padding-left: 2%;
 }
 
 #sign_up p {
+    color: rgb(172, 40, 40) ;
+}
+
+#sign_up label {
     color: rgb(172, 40, 40) ;
 }
 

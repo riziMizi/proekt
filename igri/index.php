@@ -1,8 +1,9 @@
 <?php
 require ('../model/database_igri.php');
 require('../model/database_tip.php');
-require('../model/mail.php');
+require('../class/mail.php');
 require('../model/login.php');
+require('../class/klasa_igra.php');
 if (isset($_POST['action']))
 {
     $action = $_POST['action'];
@@ -142,7 +143,7 @@ else if($action=='info_igra')
             postavi_ocenka_na_igra($igra_id,$ocenka);
             }
             $komentar=$_POST['komentar'];
-            $datum=date("Y/m/d h:i:s");
+            $datum=date("Y/m/d");
             postavi_komentar_na_igra($igra_id,$komentar,$datum);
             $vkupnoOceni=izbroj_oceni_po_igra($igra_id);
             $sumaOceni=soberi_oceni_po_igra($igra_id);
@@ -182,9 +183,9 @@ else if($action=='novi_igri')
             $doIme=$user['username'];
             $odAdresa="";
             $odIme='OcenaIgri';
-            $subject="Оцена игри-Предлог игра!";
-            $body='<p>Играта <strong>'. $igra['igra_ime'] .'</strong> што ја предложивте е додадена на нашата страница.</p>'.
-                '<p>Ви благодариме на предлогот.</p>';
+            $subject="Ocena Igri-Predlog Igra!";
+            $body='<p>Igrata <strong>'. $igra['igra_ime'] .'</strong> sto ja predlozivte e dodadena na nasata stranica.</p>'.
+                '<p>Vi blagodarime na predlogot.</p>';
             $is_body_html=true;
             try{
                 prati_mail($doAdresa,$doIme,$odAdresa,$odIme,$subject,$body,$is_body_html);
@@ -198,6 +199,13 @@ else if($action=='novi_igri')
 
             dodadi_igra_admin($igra['igra_ime']);
         }else if($_GET['nova']=='izbrisi'){
+            $Slika=$_POST['Slika'];
+            $target_dir = 'images';
+            $path = getcwd() . DIRECTORY_SEPARATOR . $target_dir;
+            if(!empty($Slika)){
+                $slika=$path .  DIRECTORY_SEPARATOR . $Slika;
+                 unlink($slika);
+           }
             izbrisi_igra_admin($_POST['ime']);
         }else if($_GET['nova']=='promeni'){
             $zname=1;

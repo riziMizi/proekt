@@ -33,6 +33,19 @@ if($proverka==false){
     header("Location: sign_in_prozor.php?error=pogresen_vlez");
      exit();
 }else{
+    if(isset($_POST['zapamti_user'])){
+        setcookie('usernameNajavaCookie', $username);
+        setcookie('passwordNajavaCookie', $password);
+    }else{
+        if(isset($_COOKIE['usernameNajavaCookie'])){
+            unset($_COOKIE['usernameNajavaCookie']);
+            setcookie('usernameNajavaCookie',null,-1);
+        }
+        if(isset($_COOKIE['passwordNajavaCookie'])){
+            unset($_COOKIE['passwordNajavaCookie']);
+            setcookie('passwordNajavaCookie',null,-1);
+        }
+    }
     $_SESSION['role']=$user['role'];
     $_SESSION['username']=$username;
     $_SESSION['email']=$user['email'];
