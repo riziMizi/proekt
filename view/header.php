@@ -62,13 +62,8 @@
 <?php
 
 function url(){
-    return sprintf(
-      "%s://%s%s",
-      isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-      $_SERVER['SERVER_NAME'],
-      $_SERVER['REQUEST_URI']
-    );
-  }
+    return $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+}
   
 ?>
 
